@@ -27,10 +27,13 @@ def get_article_meta(path, body=''):
     section = match[2].replace('_', ' ')
     title = match[4].replace('_', ' ')
 
-    return (section, section_id), (title, title_id)
+    section_info = (section, section_id)
+    title_info = (title, title_id)
+
+    return section_info, title_info
 
 
-def get_page_html(title, content, base_url = BASE_URL, template_name='article'):
+def get_page_html(title, content, base_url=BASE_URL, template_name='article'):
     with open('templates/{}.html'.format(template_name), 'r') as template_file:
         template = template_file.read()
     return template.replace('{{TITLE}}', title).replace('{{CONTENT}}', content)
@@ -52,7 +55,8 @@ def put_file(path, content):
 def convert_articles(paths):
     for file_name in paths:
         target_file_name = file_name
-        target_file_name = '{}/{}'.format(OUTPUT_DIRECTORY, get_article_relative_path(file_name))
+        target_file_name = '{}/{}'.format(OUTPUT_DIRECTORY,
+                                          get_article_relative_path(file_name))
 
         with open(file_name, 'r') as source_file:
             content = source_file.read()
@@ -69,7 +73,8 @@ def create_index(articles):
 
     html = '<ul class="ui list">'
     for section_info in sorted(content.keys(), key=lambda x: x[0]):
-        html += '<li><span class="section-name">{}</span>'.format(section_info[0])
+        html += '<li><span class="section-name">{}</span>'.format(
+            section_info[0])
         html += '<ul class="ui list link">'
 
         for title_info, article_path in content[section_info]:
@@ -81,7 +86,8 @@ def create_index(articles):
         html += '</li>'
     html += '</ul>'
 
-    put_file('public/index.html', get_page_html('Main Page', html, template_name='index'))
+    put_file('public/index.html',
+             get_page_html('Main Page', html, template_name='index'))
 
 
 def make_site():

@@ -32,38 +32,35 @@
 
 <p>Предположим, что есть папка <code>3_bars</code>, в ней файл <code>data_loaders.py</code> с таким содержанием:</p>
 
-<pre><code>:::python
-import csv
-import json
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
 
-def load_from_json(filepath):
-    with open(filepath, 'r') as file_handler:
-        return json.load(file_handler)
+<span class="k">def</span> <span class="nf">load_from_json</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handler</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
 
 
-def load_from_csv(filepath):
-    with open(filepath, 'r') as file_handler:
-        return list(csv.reader(file_handler))
-</code></pre>
+<span class="k">def</span> <span class="nf">load_from_csv</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handler</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">file_handler</span><span class="p">))</span>
+</code></pre></div>
 
 <p>А рядом есть файл <code>bars.py</code>, в котором мы хотим загрузить данные из csv. Вот что в нём можно написать:</p>
 
-<pre><code>:::python
-from data_loaders import load_from_csv  # импортируем функцию из модуля
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">data_loaders</span> <span class="kn">import</span> <span class="n">load_from_csv</span>  <span class="c1"># импортируем функцию из модуля</span>
 
 
-print(load_from_csv('bars.csv')
-</code></pre>
+<span class="k">print</span><span class="p">(</span><span class="n">load_from_csv</span><span class="p">(</span><span class="s1">&#39;bars.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>А можно так:</p>
 
-<pre><code>:::python
-import data_loaders  # импортируем модуль целиком
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">data_loaders</span>  <span class="c1"># импортируем модуль целиком</span>
 
 
-print(data_loaders.load_from_csv('bars.csv')  # используем функцию с указанием модуля
-</code></pre>
+<span class="k">print</span><span class="p">(</span><span class="n">data_loaders</span><span class="o">.</span><span class="n">load_from_csv</span><span class="p">(</span><span class="s1">&#39;bars.csv&#39;</span><span class="p">)</span>  <span class="c1"># используем функцию с указанием модуля</span>
+</code></pre></div>
 
 <p>Есть ещё вариант <code>from data_loaders import *</code>, но он вне закона. Забудьте о нём.</p>
 
@@ -73,17 +70,16 @@ print(data_loaders.load_from_csv('bars.csv')  # используем функц�
 если в нём есть код, он будет выполнен. Даже если это не просто объявления функций, а их вызов. Представим,
 что когда мы писали код в <code>data_loaders.py</code>, мы его дебажили. Например, так:</p>
 
-<pre><code>:::python
-import json
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 
 
-def load_from_json(filepath):
-    with open(filepath, 'r') as file_handler:
-        return json.load(file_handler)
+<span class="k">def</span> <span class="nf">load_from_json</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handler</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
 
 
-print(load_from_json('test.json'))
-</code></pre>
+<span class="k">print</span><span class="p">(</span><span class="n">load_from_json</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">))</span>
+</code></pre></div>
 
 <p>Теперь если мы импортируем этот модуль (<code>import data_loaders</code>), девятая строка выполнится, файл загрузится и выведется
 на экран. А ведь в <code>bars.py</code> это не нужно! Можно этот код удалить, но тогда будет неудобно дорабатывать функцию
@@ -91,18 +87,17 @@ print(load_from_json('test.json'))
 
 <p>Вот правильный способ это обойти:</p>
 
-<pre><code>:::python
-import json
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 
 
-def load_from_json(filepath):
-    with open(filepath, 'r') as file_handler:
-        return json.load(file_handler)
+<span class="k">def</span> <span class="nf">load_from_json</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handler</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
 
 
-if __name__ == '__main__':
-    print(load_from_json('test.json'))
-</code></pre>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">load_from_json</span><span class="p">(</span><span class="s1">&#39;test.json&#39;</span><span class="p">))</span>
+</code></pre></div>
 
 <p>Иф на девятой строке значит "выполняй меня только если файл запущен напрямую, а не импортирован".
 Теперь при запуске <code>python data_loaders.py</code> будет выполняться дебажная загрузка кода, а
@@ -118,28 +113,26 @@ if __name__ == '__main__':
 <p>Главный подводный камень – рекурсивный импорт. Это если мы импортируем <code>data_loaders</code> из <code>bars</code>, а для <code>data_loaders</code>
 нужен <code>bars</code>. Вот так:</p>
 
-<pre><code>:::python
-# bars.py
-import data_loaders
+<div class="codehilite"><pre><span></span><code><span class="c1"># bars.py</span>
+<span class="kn">import</span> <span class="nn">data_loaders</span>
 
-# data_loaders.py
-import bars
-</code></pre>
+<span class="c1"># data_loaders.py</span>
+<span class="kn">import</span> <span class="nn">bars</span>
+</code></pre></div>
 
 <p>Бах! Всё сломается при запуске.</p>
 
 <p>Иногда бывает ещё веселее: когда импорты замыкаются в трёх и более файлах. Типа того:</p>
 
-<pre><code>:::python
-# bars.py
-import data_loaders
+<div class="codehilite"><pre><span></span><code><span class="c1"># bars.py</span>
+<span class="kn">import</span> <span class="nn">data_loaders</span>
 
-# data_loaders.py
-import helpers
+<span class="c1"># data_loaders.py</span>
+<span class="kn">import</span> <span class="nn">helpers</span>
 
-# helpers.py
-import bars
-</code></pre>
+<span class="c1"># helpers.py</span>
+<span class="kn">import</span> <span class="nn">bars</span>
+</code></pre></div>
 
 <p>Всё сломается так же, как в примере выше, но ещё и заставит поломать голову при починке.</p>
 
@@ -159,25 +152,24 @@ import bars
 <p>В памяти все загруженные модули хранятся в <code>sys.modules</code>. Иногда встречаются случаи, когда файла нет, а модуль есть.
 Это не сложно устроить:</p>
 
-<pre><code>:::python
-# mod.py
-import sys
-from types import ModuleType
+<div class="codehilite"><pre><span></span><code><span class="c1"># mod.py</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">ModuleType</span>
 
 
-dynamic_module = ModuleType(__name__)
-dynamic_module.x = 5
+<span class="n">dynamic_module</span> <span class="o">=</span> <span class="n">ModuleType</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">dynamic_module</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
 
-sys.modules['some_weird_module'] = dynamic_module
-
-
-# script.py
-import mod  # тут выполнился код из mod.py
-import some_weird_module  # модуль есть, а файла – нет
+<span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;some_weird_module&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dynamic_module</span>
 
 
-print(some_weird_module.x)  # 5
-</code></pre>
+<span class="c1"># script.py</span>
+<span class="kn">import</span> <span class="nn">mod</span>  <span class="c1"># тут выполнился код из mod.py</span>
+<span class="kn">import</span> <span class="nn">some_weird_module</span>  <span class="c1"># модуль есть, а файла – нет</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">some_weird_module</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># 5</span>
+</code></pre></div>
 
 <p>Делать так незаконно: это неочевидно, затрудняет отладку и вредит читаемости. Не надо так.</p>
 

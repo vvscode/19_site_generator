@@ -24,12 +24,11 @@
 
 <p>Ну, вы все знаете условный оператор, так ведь?</p>
 
-<pre><code>:::python
-if age &lt; 18:
-    print('Никаких тебе сигарет. Ишь чего удумал!')
-else:
-    print('Вам синий или красный?')
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">18</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Никаких тебе сигарет. Ишь чего удумал!&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Вам синий или красный?&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Есть ещё <code>elif</code>, их можно сделать много в одном операторе. Это такой аналог <code>which</code> из других языков.</p>
 
@@ -37,19 +36,17 @@ else:
 
 <p>Цикл. Вместо сишного варианта с init, cond и loop выражениями, тут просто итерация по коллекции:</p>
 
-<pre><code>:::python
-for user in users:
-    print user
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">user</span>
+</code></pre></div>
 
 <p>Иногда надо не пройтись по списку, а выполнить одну и ту же операцию много раз. Тогда хорошо подходит функция
 <a href="https://docs.python.org/3.5/library/functions.html#func-range">range</a>. Она возвращает целые числа в заданном промежутке,
 поэтому в цикле её можно использовать так:</p>
 
-<pre><code>:::python
-for level_num in range(10):
-    user.levelup()  # пользователь получит десять уровней. Читер!
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">level_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">levelup</span><span class="p">()</span>  <span class="c1"># пользователь получит десять уровней. Читер!</span>
+</code></pre></div>
 
 <p>А вот <code>break</code> и <code>continue</code> делают то же, что в Паскале и Сях. <code>break</code> прерывает выполнение цикла,
 <code>continue</code> завершает текущую итерацию и переходит к следующей.</p>
@@ -62,28 +59,25 @@ for level_num in range(10):
 <p>Начало объявления функции. После него идёт название,
 потом – аргументы функции в скобках, двоеточие и тело функции с отступом:</p>
 
-<pre><code>:::python
-def get_square(value):
-    return value ** 2
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_square</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">value</span> <span class="o">**</span> <span class="mi">2</span>
+</code></pre></div>
 
 <p>То, что после <code>return</code> – это возвращаемое значение функции.</p>
 
 <p>Функцию создали, вот как её теперь использовать:</p>
 
-<pre><code>:::python
-print(get_square(2))  # 4
-print(get_square(6))  # 36
-print(get_square('ыыы'))  # всё сломается
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">print</span><span class="p">(</span><span class="n">get_square</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># 4</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_square</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>  <span class="c1"># 36</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_square</span><span class="p">(</span><span class="s1">&#39;ыыы&#39;</span><span class="p">))</span>  <span class="c1"># всё сломается</span>
+</code></pre></div>
 
 <p>А вот пример посложнее, из исходников Девмана. Получает пользователя по айди в Слаке:</p>
 
-<pre><code>:::python
-def _get_user_by_slack_id(slack_user_id):
-    user_email = get_slack_email_for_user(slack_user_id)
-    return User.objects.filter(email__iexact=user_email).first()
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">_get_user_by_slack_id</span><span class="p">(</span><span class="n">slack_user_id</span><span class="p">):</span>
+    <span class="n">user_email</span> <span class="o">=</span> <span class="n">get_slack_email_for_user</span><span class="p">(</span><span class="n">slack_user_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email__iexact</span><span class="o">=</span><span class="n">user_email</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</code></pre></div>
 
 <p>(вот почему емейл необходим)</p>
 
@@ -91,20 +85,18 @@ def _get_user_by_slack_id(slack_user_id):
 
 <p>Функция очень полезная, поэтому про неё отдельно. <code>range</code> генерирует целые числа в заданном диапазоне. Например:</p>
 
-<pre><code>:::python
-range(10)  # 0..0
-range(5, 10)  # 5..9
-range(5, 10, 2)  # [5, 7, 9] (от пяти до девяти с шагом два)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># 0..0</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># 5..9</span>
+<span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># [5, 7, 9] (от пяти до девяти с шагом два)</span>
+</code></pre></div>
 
 <p>Фишка этой функции заключается в том, что она не создаёт список со всеми числами.
 Вместо этого он вернёт объект, который будет возвращать элементы как только они нужны, по одному.
 Поэтому код <code>range(9999999999999)</code> не съест всю память.
 Этот хитрый объект (Sequence ABC, но об этом потом) можно превратить в список явно:</p>
 
-<pre><code>:::python
-list(range(9999999999999))
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">9999999999999</span><span class="p">))</span>
+</code></pre></div>
 
 <p>(не советую так делать)</p>
 
@@ -112,10 +104,9 @@ list(range(9999999999999))
 
 <p>Блок, который ничего не делает:</p>
 
-<pre><code>:::python
-for i in range(20):
-    pass  # 20 раз сделать ничего. Очень полезно!
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="k">pass</span>  <span class="c1"># 20 раз сделать ничего. Очень полезно!</span>
+</code></pre></div>
 
 <p>Часто используется в начальном коде для заданий: в финальной версии вместо <code>pass</code> должен быть настоящий код.</p>
 

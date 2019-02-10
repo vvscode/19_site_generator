@@ -22,41 +22,36 @@
 
 <p>Раньше в C++ итерация по коллекции проходила так:</p>
 
-<pre><code>:::cpp
-for(int i = 0; i &lt; books_amount; i++) {
-    cout &lt;&lt; books[i];
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">books_amount</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">books</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>Этот же способ используется в других языках. Поэтому на Питоне хочется написать так же:</p>
 
-<pre><code>:::python
-for i in len(books):
-    print(books[i])
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">len</span><span class="p">(</span><span class="n">books</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">books</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</code></pre></div>
 
 <p>Это неудобная дичь, древность и вообще. Вот как надо:</p>
 
-<pre><code>:::python
-for book in books:
-    print(book)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">books</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Часто вместе с элементом нужен его номер. Памятуя, что можно итерировать по коллекции, хочется сделать как-то так:</p>
 
-<pre><code>:::python
-i = 0 
-for book in books:
-    print(i, book)
-    i += 1
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">books</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">book</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>
 
 <p>Это тоже неудобная дичь, древность и вообще. Для этого есть встроенная функция <code>enumerate</code>:</p>
 
-<pre><code>:::python
-for book_number, book in enumerate(books):
-    print(book_number, book)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">book_number</span><span class="p">,</span> <span class="n">book</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">books</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">book_number</span><span class="p">,</span> <span class="n">book</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Делай правильно и не делай неправильно.</p>
 
@@ -69,15 +64,14 @@ for book_number, book in enumerate(books):
 
 <p>Для "ничего" в Питоне есть <code>None</code>. Не пустая строка и не -1, а именно <code>None</code>:</p>
 
-<pre><code>:::python
-try:
-    latitude = float(input('Введите широту: '))
-except ValueError:
-    latitude = None
+<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">latitude</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Введите широту: &#39;</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="n">latitude</span> <span class="o">=</span> <span class="bp">None</span>
 
-if latitude is None:
-    print('wtf, dude?')
-</code></pre>
+<span class="k">if</span> <span class="n">latitude</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;wtf, dude?&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Обрати внимание на то, как проверяется, находится ли в переменной <code>None</code>: <code>if latitude is None</code>.
 Не <code>if latitude == None</code> и не <code>if latitude</code>. Это важно.</p>
@@ -86,33 +80,30 @@ if latitude is None:
 
 <p>Загрузим json из файла:</p>
 
-<pre><code>:::python
-def load_json_data(filepath):
-    with open(filepath, 'r') as file_handler:
-        return json.load(file_handler)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_json_data</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handler</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Всё сломается, если передать путь до несуществующего файла. Исправим:</p>
 
-<pre><code>:::python
-def load_json_data(filepath):
-    if os.path.exists(filepath):
-        with open(filepath, 'r') as file_handler:
-            return json.load(file_handler)
-    else:
-        return None
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_json_data</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div>
 
 <p>Первый секрет: если функция ничего не возвращает, то она возвращает <code>None</code>. Поэтому писать <code>return None</code> в конце
  функции смысла нет.
 Избавляемся от <code>else</code>:</p>
 
-<pre><code>:::python
-def load_json_data(filepath):
-    if os.path.exists(filepath):
-        with open(filepath, 'r') as file_handler:
-            return json.load(file_handler)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_json_data</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handler</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Теперь всё лаконично, но очень связанно, как предложение, в котором, помимо деепричастных оборотов, есть ещё
 несколько уровней подчинений, сложным образом связанных друг с другом и заставляющие держать их все в
@@ -120,13 +111,12 @@ def load_json_data(filepath):
 
 <p>Упростить можно так:</p>
 
-<pre><code>:::python
-def load_json_data(filepath):
-    if not os.path.exists(filepath):
-        return None
-    with open(filepath, 'r') as file_handler:
-        return json.load(file_handler)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_json_data</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handler</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file_handler</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Теперь стало проще: меньше вложенности, просто читать. Меньше багов.</p>
 
@@ -135,37 +125,33 @@ def load_json_data(filepath):
 <p>Часто в коде приходится проверять переменные на нулевые значения.
 Например, пустой список:</p>
 
-<pre><code>:::python
-if len(users) == 0:
-    pass
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div>
 
 <p>Или пустая строка:</p>
 
-<pre><code>:::python
-if user.email == '':
-    pass
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div>
 
 <p>Или ноль:</p>
 
-<pre><code>:::python
-if user.level == 0:
-    pass
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div>
 
 <p>Все три примера выше – неверные. Вот их верные аналоги:</p>
 
-<pre><code>:::python
-if not users:
-    pass
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="ow">not</span> <span class="n">users</span><span class="p">:</span>
+    <span class="k">pass</span>
 
-if not user.email:
-    pass
+<span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
+    <span class="k">pass</span>
 
-if not user.level:
-    pass
-</code></pre>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">level</span><span class="p">:</span>
+    <span class="k">pass</span>
+</code></pre></div>
 
 <p>Дело в том, что любое условное выражение неявно конвертируется в boolean. Для каждого типа правила конвертации свои.
 Например, любая строка превратится в <code>True</code>, кроме пустой. Любое число – тоже <code>True</code>, кроме нуля.
@@ -215,12 +201,11 @@ if not user.level:
 
 <p>Понятным – это когда с первого взгляда понятно, что он делает:</p>
 
-<pre><code>:::python
-credentials = load_oauth_credentials_from_file('fb_creds.json')
-fb_api = get_facebook_api(credentials)
-messages = fb_api.get_unread_messages()
-send_notifications_to_slack(messages=messages, user='ilebedev')
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">credentials</span> <span class="o">=</span> <span class="n">load_oauth_credentials_from_file</span><span class="p">(</span><span class="s1">&#39;fb_creds.json&#39;</span><span class="p">)</span>
+<span class="n">fb_api</span> <span class="o">=</span> <span class="n">get_facebook_api</span><span class="p">(</span><span class="n">credentials</span><span class="p">)</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="n">fb_api</span><span class="o">.</span><span class="n">get_unread_messages</span><span class="p">()</span>
+<span class="n">send_notifications_to_slack</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s1">&#39;ilebedev&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Сперва из файла загружаются ключи доступа к АПИ Фейсбука, потом создаётся объект для взаимодействия
 с АПИ и получаются непрочитанные сообщение. Эти сообщения отправляются в Слак пользователю ilebedev.</p>

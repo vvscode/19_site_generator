@@ -22,9 +22,8 @@
 
 <p>Комментарии – способ прокомментировать код на ходу, на той же строке. </p>
 
-<pre><code>:::python
-price = Column(BigInteger)  # рубли * 100
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">price</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">)</span>  <span class="c1"># рубли * 100</span>
+</code></pre></div>
 
 <h3>Докстринги</h3>
 
@@ -32,15 +31,14 @@ price = Column(BigInteger)  # рубли * 100
 Она нужна для документирования всей функции: описания входящих параметров, результата, логики, крайних случаев.
 Заключается в тройные двойные кавычки. Вот так:</p>
 
-<pre><code>:::python
-def tensorsolve(a, b, axes=None):
-    """
-    Solve the tensor equation ``a x = b`` for x.
-    It is assumed that all indices of `x` are summed over in the product,
-    together with the rightmost indices of `a`, as is done in, for example,
-    ``tensordot(a, x, axes=len(b.shape))``.
-    """
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tensorsolve</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solve the tensor equation ``a x = b`` for x.</span>
+<span class="sd">    It is assumed that all indices of `x` are summed over in the product,</span>
+<span class="sd">    together with the rightmost indices of `a`, as is done in, for example,</span>
+<span class="sd">    ``tensordot(a, x, axes=len(b.shape))``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
 
 <p>В серьёзных проектах из них часто генерируется документация, поэтому они могут быть большими, по несколько экранов.
 Это касается проектов, у которых есть документация для разработчиков: Django, numpy, sqlalchemy.</p>
@@ -59,34 +57,30 @@ def tensorsolve(a, b, axes=None):
 В таком случае комментарий не несёт дополнительной информации, а просто переводит соседний код
 с Питона на русский/английский. Пример:</p>
 
-<pre><code>:::python
-# загружаем данные из файла data.json
-with open('users.json', 'r') as handler:
-    data = json.load(handler)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="c1"># загружаем данные из файла data.json</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;users.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Вот как можно исправить:</p>
 
-<pre><code>:::python
-with open('users.json', 'r') as handler:
-    data = json.load(handler)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;users.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handler</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+</code></pre></div>
 
 <p>А так – ещё лучше:</p>
 
-<pre><code>:::python
-data = load_all_users_from_file()
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">data</span> <span class="o">=</span> <span class="n">load_all_users_from_file</span><span class="p">()</span>
+</code></pre></div>
 
 <h3>Не сопровождать комментарии</h3>
 
 <p>Другая частая ошибка: не менять комментарии при изменении кода. В примере выше мы загружали данные из файла. 
 Через месяц взялись за голову и поселили данные в базе данных. Код стал таким:</p>
 
-<pre><code>:::python
-# загружаем данные из файла data.json
-data = db_session.query(User).all()
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="c1"># загружаем данные из файла data.json</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">db_session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</code></pre></div>
 
 <p>Данные из файла? WAT?</p>
 
@@ -96,9 +90,8 @@ data = db_session.query(User).all()
 В таком состоянии всё поведение кажется понятным, поэтому разработчик может оставить комментарий самому себе.
 Проблема в том, что когда он переключится на другую задачу и забудет про детали, комментарий может взорвать мозг:</p>
 
-<pre><code>:::python
-inv(strain_tensor) - rigidity.T  # правый случай
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">inv</span><span class="p">(</span><span class="n">strain_tensor</span><span class="p">)</span> <span class="o">-</span> <span class="n">rigidity</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># правый случай</span>
+</code></pre></div>
 
 <p>Правый, правда? Ну, теперь всё понятно.</p>
 

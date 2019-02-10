@@ -17,7 +17,7 @@ def get_articles_files():
 
 
 def get_article_html(path, body):
-    return markdown2.markdown(body, extras=["fenced-code-blocks"])
+    return markdown2.markdown(body, extras=["code-color", "fenced-code-blocks"])
 
 
 def get_article_meta(path, body=""):

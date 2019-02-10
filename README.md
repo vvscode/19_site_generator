@@ -20,6 +20,8 @@ python3 generate.py
 python3 generate.py --livereload
 ```
 
+You can find preview here: https://vvscode.github.io/19_site_generator/public/
+
 # Project Goals
 
 The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)

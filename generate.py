@@ -9,6 +9,7 @@ from collections import defaultdict
 
 INPUT_DIRECTORY = 'articles'
 OUTPUT_DIRECTORY = 'public'
+BASE_URL = 'https://vvscode.github.io/19_site_generator/public/'
 
 
 def get_articles_files():
@@ -29,7 +30,7 @@ def get_article_meta(path, body=''):
     return (section, section_id), (title, title_id)
 
 
-def get_page_html(title, content, template_name='article'):
+def get_page_html(title, content, base_url = BASE_URL, template_name='article'):
     with open('templates/{}.html'.format(template_name), 'r') as template_file:
         template = template_file.read()
     return template.replace('{{TITLE}}', title).replace('{{CONTENT}}', content)
@@ -80,7 +81,7 @@ def create_index(articles):
         html += '</li>'
     html += '</ul>'
 
-    put_file('public/index.html', get_page_html('Main Page', html, 'index'))
+    put_file('public/index.html', get_page_html('Main Page', html, template_name='index'))
 
 
 def make_site():
